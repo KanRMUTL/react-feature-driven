@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../../shared/styles/theme";
+import { theme } from "shared/styles/theme";
 
 interface ImageProps {
   src: string;

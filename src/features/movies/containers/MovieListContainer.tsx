@@ -4,8 +4,8 @@ import { useMovieNavigation } from "../hooks/useMovienavigation";
 import { MovieCard } from "../components/MovieCard";
 import { SearchBar } from "../components/SearchBar";
 import styled from "styled-components";
-import { Box } from "../../../shared/components/ui/Box";
-import { Pagination } from "../../../shared/components/ui/Pagination";
+import { Box } from "shared/components/ui/Box";
+import { Pagination } from "shared/components/ui/Pagination";
 
 const Grid = styled.div`
   display: grid;
@@ -36,7 +36,6 @@ export const MovieListContainer = () => {
   if (isLoading || !data) return null;
 
   const totalPages = Math.min(data.total_pages, 500);
-
 
   return (
     <Box>

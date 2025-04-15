@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card, Box } from "../../../shared/components/ui/Box";
+import { Card, Box } from "shared/components/ui/Box";
 
 const MovieCardContainer = styled(Card)`
   display: flex;

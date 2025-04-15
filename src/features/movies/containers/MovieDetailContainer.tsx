@@ -1,6 +1,6 @@
 import { useMovieDetail } from "../hooks/useMovieDetail";
 import styled from "styled-components";
-import { Box } from "../../../shared/components/ui/Box";
+import { Box } from "shared/components/ui/Box";
 
 const DetailContainer = styled(Box)`
   max-width: 1200px;

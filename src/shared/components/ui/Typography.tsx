@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../../shared/styles/theme";
+import { theme } from "shared/styles/theme";
 
 export const Typography = styled.p<{
   $variant?: keyof typeof theme.typography;

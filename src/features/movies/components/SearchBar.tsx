@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { Button } from "../../../shared/components/ui/Button";
+import { Button } from "shared/components/ui/Button";
 
 const Container = styled.div`
   display: flex;
