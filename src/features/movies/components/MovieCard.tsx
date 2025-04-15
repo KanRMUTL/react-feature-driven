@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Card, Box } from "shared/components/ui/Box";
+import Skeleton from "react-loading-skeleton";
 
 const MovieCardContainer = styled(Card)`
   display: flex;
@@ -40,7 +41,7 @@ const Rating = styled.div`
   font-weight: 500;
 `;
 
-interface MovieCardProps {
+export interface MovieCardProps {
   poster_path: string | null;
   title: string;
   vote_average: number;
@@ -71,3 +72,15 @@ export const MovieCard = ({
     </MovieInfo>
   </MovieCardContainer>
 );
+
+export const LoadingMovieCard = () => {
+  return (
+    <MovieCardContainer>
+      <Skeleton height={300} />
+      <MovieInfo>
+        <Skeleton height={20} width="80%" />
+        <Skeleton height={16} width="40%" style={{ marginTop: "8px" }} />
+      </MovieInfo>
+    </MovieCardContainer>
+  );
+};

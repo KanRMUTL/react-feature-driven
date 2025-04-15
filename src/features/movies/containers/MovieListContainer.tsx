@@ -1,11 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import { useSearchMovies } from "../hooks/useSearchMovies";
 import { useMovieNavigation } from "../hooks/useMovienavigation";
-import { MovieCard } from "../components/MovieCard";
 import { SearchBar } from "../components/SearchBar";
 import styled from "styled-components";
 import { Box } from "shared/components/ui/Box";
 import { Pagination } from "shared/components/ui/Pagination";
+import { MovieListWithLoading } from "../components/MovieListWithLoading";
 
 const Grid = styled.div`
   display: grid;
@@ -33,21 +33,19 @@ export const MovieListContainer = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (isLoading || !data) return null;
-
-  const totalPages = Math.min(data.total_pages, 500);
+  const totalPages = Math.min(data?.total_pages || 0, 500);
+  const movieList = data?.results || [];
 
   return (
     <Box>
       <SearchBar onSearch={handleSearch} initialValue={searchKeyword} />
       <Grid>
-        {data.results.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            {...movie}
-            onClick={() => handleMovieClick(movie.id)}
-          />
-        ))}
+        <MovieListWithLoading
+          {...data?.results}
+          onClick={(id) => handleMovieClick(id)}
+          isLoading={isLoading}
+          movieList={movieList}
+        />
       </Grid>
       <Pagination
         currentPage={currentPage}
