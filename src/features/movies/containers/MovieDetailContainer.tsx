@@ -1,9 +1,6 @@
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getMovieDetail } from "../services/movieService";
-import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import { Title, Text } from "../../../shared/components/ui/Typography";
+import { useMovieDetail } from "../hooks/useMovieDetail";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -15,18 +12,10 @@ const Poster = styled.img`
 `;
 
 export const MovieDetailContainer = () => {
-  const { id } = useParams();
-  const { data, isLoading } = useQuery({
-    queryKey: ["movie", id],
-    queryFn: () => getMovieDetail(Number(id)),
-    enabled: !!id, // ป้องกันไม่ให้ fetch ถ้ายังไม่มี id
-  });
+  const { data, isLoading, director, actors } = useMovieDetail();
 
-  if (isLoading || !data) return <Skeleton count={10} />;
-
-  const director = data.credits.crew.find((p: any) => p.job === "Director");
-  const actors = data.credits.cast.slice(0, 5);
-
+  if (isLoading || !data) return null;
+  const directorName = director?.name || "";
   return (
     <Wrapper>
       <Poster
@@ -36,8 +25,8 @@ export const MovieDetailContainer = () => {
       <Title>{data.title}</Title>
       <Text>⭐ {data.vote_average}</Text>
       <Text>📝 {data.overview}</Text>
-      <Text>🎬 Director: {director?.name}</Text>
-      <Text>🎭 นักแสดง: {actors.map((a: any) => a.name).join(", ")}</Text>
+      <Text>🎬 Director: {directorName}</Text>
+      <Text>🎭 นักแสดง: {actors.map((a) => a.name).join(", ")}</Text>
       <Text>📅 เข้าฉาย: {data.release_date}</Text>
     </Wrapper>
   );
