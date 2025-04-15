@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Box } from "../ui/Box";
 
@@ -32,16 +33,25 @@ const Footer = styled.footer`
   font-size: ${({ theme }) => theme.typography.small.size};
 `;
 
+const Title = styled.h1`
+  cursor: pointer;
+`;
+
 interface WebLayoutProps {
   children: React.ReactNode;
 }
 
 export const WebLayout = ({ children }: WebLayoutProps) => {
+  const navigate = useNavigate();
+  const handleTitleClick = () => {
+    navigate("/");
+  };
+
   return (
     <LayoutContainer>
       <Header>
         <Box $flex $justify="space-between" $align="center">
-          <h1>The Movie Database</h1>
+          <Title onClick={handleTitleClick}>The Movie Database</Title>
           <nav>{/* Add navigation items here */}</nav>
         </Box>
       </Header>

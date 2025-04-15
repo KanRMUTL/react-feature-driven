@@ -5,7 +5,9 @@ import {
   MovieDetail,
 } from "../types/movie";
 
-export const getPopularMovies = (page = 1): Promise<PopularMoviesResponse> =>
+export const getPopularMovies = (
+  page = 1,
+  ): Promise<PopularMoviesResponse> =>
   tmdbClient
     .get("/movie/popular", { params: { page } })
     .then((res) => res.data);

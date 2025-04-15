@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../../shared/components/ui/Button";
 
 const Container = styled.div`
@@ -21,12 +21,18 @@ const Input = styled.input`
   }
 `;
 
-export const SearchBar = ({
-  onSearch,
-}: {
+interface SearchBarProps {
   onSearch: (keyword: string) => void;
-}) => {
-  const [value, setValue] = useState("");
+  initialValue?: string;
+}
+
+export const SearchBar = ({ onSearch, initialValue = "" }: SearchBarProps) => {
+  const [value, setValue] = useState(initialValue);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
   return (
     <Container>
       <Input
@@ -34,6 +40,11 @@ export const SearchBar = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="ค้นหาชื่อหนัง..."
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onSearch(value);
+          }
+        }}
       />
       <Button onClick={() => onSearch(value)}>ค้นหา</Button>
     </Container>
