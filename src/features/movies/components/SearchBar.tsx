@@ -4,16 +4,21 @@ import { Button } from "../../../shared/components/ui/Button";
 
 const Container = styled.div`
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
-  font-size: 16px;
+  padding: ${({ theme }) => theme.spacing.sm};
+  font-size: ${({ theme }) => theme.typography.body.size};
   flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.colors.text.secondary};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary.main};
+  }
 `;
 
 export const SearchBar = ({

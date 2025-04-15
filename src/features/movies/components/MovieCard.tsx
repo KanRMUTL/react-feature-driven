@@ -1,10 +1,43 @@
 import styled from "styled-components";
+import { Card, Box } from "../../../shared/components/ui/Box";
 
-const Card = styled.div`
+const MovieCardContainer = styled(Card)`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: ${({ theme }) => theme.spacing.sm};
   width: 200px;
+  cursor: pointer;
+  background: ${({ theme }) => theme.colors.background.main};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.md};
+`;
+
+const MovieImage = styled.img`
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: ${({ theme }) => theme.borderRadius.sm}
+    ${({ theme }) => theme.borderRadius.sm} 0 0;
+`;
+
+const MovieInfo = styled(Box)`
+  padding: ${({ theme }) => theme.spacing.sm};
+`;
+
+const MovieTitle = styled.h3`
+  font-size: ${({ theme }) => theme.typography.body.size};
+  font-weight: ${({ theme }) => theme.typography.body.weight};
+  margin: 0;
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+const Rating = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  color: ${({ theme }) => theme.colors.secondary.main};
+  font-weight: 500;
 `;
 
 interface MovieCardProps {
@@ -20,8 +53,8 @@ export const MovieCard = ({
   vote_average,
   onClick,
 }: MovieCardProps) => (
-  <Card onClick={onClick}>
-    <img
+  <MovieCardContainer onClick={onClick}>
+    <MovieImage
       src={
         poster_path
           ? `https://image.tmdb.org/t/p/w300${poster_path}`
@@ -29,7 +62,12 @@ export const MovieCard = ({
       }
       alt={title}
     />
-    <strong>{title}</strong>
-    <span>⭐ {vote_average}</span>
-  </Card>
+    <MovieInfo>
+      <MovieTitle>{title}</MovieTitle>
+      <Rating>
+        <span>⭐</span>
+        <span>{vote_average.toFixed(1)}</span>
+      </Rating>
+    </MovieInfo>
+  </MovieCardContainer>
 );

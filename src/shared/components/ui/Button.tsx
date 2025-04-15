@@ -5,6 +5,6 @@ export const Button = styled.button`
   color: white;
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   border: none;
-  border-radius: ${({ theme }) => theme.radius.md};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   cursor: pointer;
 `

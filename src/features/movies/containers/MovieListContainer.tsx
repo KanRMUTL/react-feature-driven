@@ -9,8 +9,8 @@ const Grid = styled.div`
   gap: 1rem;
 `;
 
-export const MovieListContainer = ({ page }: { page: number }) => {
-  const { data, isLoading } = usePopularMovies(page);
+export const MovieListContainer = () => {
+  const { data, isLoading } = usePopularMovies(1);
   const { handleMovieClick } = useMovieNavigation();
   if (isLoading || !data) return null;
 

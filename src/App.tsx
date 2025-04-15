@@ -1,16 +1,19 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { MovieListContainer } from './features/movies/containers/MovieListContainer'
-import { MovieDetailContainer } from './features/movies/containers/MovieDetailContainer'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { WebLayout } from "./shared/components/layout/WebLayout";
+import { MovieListContainer } from "./features/movies/containers/MovieListContainer";
+import { MovieDetailContainer } from "./features/movies/containers/MovieDetailContainer";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<MovieListContainer page={1} />} />
-        <Route path='/movie/:id' element={<MovieDetailContainer />} />
-      </Routes>
+      <WebLayout>
+        <Routes>
+          <Route path="/" element={<MovieListContainer />} />
+          <Route path="/movie/:id" element={<MovieDetailContainer />} />
+        </Routes>
+      </WebLayout>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default App
+export default App;

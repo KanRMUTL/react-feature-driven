@@ -1,27 +1,81 @@
 export interface Theme {
   colors: {
-    primary: string;
-    background: string;
-    text: string;
-    gray: string;
+    primary: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    secondary: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    background: {
+      main: string;
+      surface: string;
+      hover: string;
+    };
+    text: {
+      primary: string;
+      secondary: string;
+      disabled: string;
+    };
   };
   spacing: {
     xs: string;
     sm: string;
     md: string;
     lg: string;
+    xl: string;
+    xxl: string;
   };
-  fontSizes: {
+  typography: {
+    h1: {
+      size: string;
+      weight: string;
+      lineHeight: string;
+    };
+    h2: {
+      size: string;
+      weight: string;
+      lineHeight: string;
+    };
+    body: {
+      size: string;
+      weight: string;
+      lineHeight: string;
+    };
+    small: {
+      size: string;
+      weight: string;
+      lineHeight: string;
+    };
+  };
+  shadows: {
     sm: string;
     md: string;
     lg: string;
-    xl: string;
   };
-  radius: {
+  borderRadius: {
     sm: string;
     md: string;
+    lg: string;
   };
-  shadow: {
-    card: string;
+  transitions: {
+    default: string;
+    fast: string;
+    slow: string;
+  };
+  breakpoints: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+    wide: string;
+  };
+  zIndex: {
+    base: number;
+    dropdown: number;
+    modal: number;
+    toast: number;
   };
 }
