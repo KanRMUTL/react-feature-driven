@@ -14,6 +14,7 @@ export interface Theme {
       main: string;
       surface: string;
       hover: string;
+      white: string;
     };
     text: {
       primary: string;

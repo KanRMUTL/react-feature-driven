@@ -49,7 +49,7 @@ export const MovieListContainer = () => {
   };
 
   return (
-    <Box $flex $direction="column" $gap="sm">
+    <Box $flex $direction="column" $gap="sm" $bg="surface">
       <Navigation category={category}  onClick={handleSelectCategory} />
       <SearchBar onSearch={handleSearch} initialValue={searchKeyword} />
       <Grid>

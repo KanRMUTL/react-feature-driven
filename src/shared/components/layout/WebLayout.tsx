@@ -6,10 +6,11 @@ const LayoutContainer = styled(Box)`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: ${({ theme }) => theme.colors.background.surface};
 `;
 
 const Header = styled.header`
-  background: ${({ theme }) => theme.colors.background.main};
+  background: ${({ theme }) => theme.colors.background.white};
   padding: ${({ theme }) => theme.spacing.md};
   box-shadow: ${({ theme }) => theme.shadows.sm};
   position: sticky;
