@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getMovieDetail } from "../services/movieService";
-import { MovieDetail } from "../types/movie";
+import { getMovieDetail } from "../services/movieDetailService";
+import { MovieDetail } from "../types/movieDetail";
 
 export const useMovieDetail = () => {
   const { id } = useParams();

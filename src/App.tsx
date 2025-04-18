@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WebLayout } from "./shared/components/layout/WebLayout";
-import { MovieListContainer } from "./features/movies/containers/MovieListContainer";
-import { MovieDetailContainer } from "./features/movies/containers/MovieDetailContainer";
+import { MovieListContainer } from "./features/movies-list/containers/MovieListContainer";
+import { MovieDetailContainer } from "./features/movie-details/containers/MovieDetailContainer";
 
 const App = () => {
   return (
