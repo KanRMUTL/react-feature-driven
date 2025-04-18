@@ -1,12 +1,18 @@
 import { tmdbClient } from "shared/api/tmdbClient";
-import {
-  PopularMoviesResponse,
-  SearchMoviesResponse,
-} from "../types/movie";
+import { PopularMoviesResponse, SearchMoviesResponse } from "../types/movie";
 
-export const getPopularMovies = (page = 1): Promise<PopularMoviesResponse> =>
+export type MovieCategory =
+  | "popular"
+  | "top_rated"
+  | "upcoming"
+  | "now_playing";
+
+export const getMoviesByCategory = (
+  category: MovieCategory,
+  page = 1
+): Promise<PopularMoviesResponse> =>
   tmdbClient
-    .get("/movie/popular", { params: { page } })
+    .get(`/movie/${category}`, { params: { page } })
     .then((res) => res.data);
 
 export const searchMovies = (

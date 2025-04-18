@@ -9,6 +9,9 @@ const App = () => {
       <WebLayout>
         <Routes>
           <Route path="/" element={<MovieListContainer />} />
+          <Route path="/top-rated" element={<MovieListContainer />} />
+          <Route path="/upcoming" element={<MovieListContainer />} />
+          <Route path="/now-playing" element={<MovieListContainer />} />
           <Route path="/movie/:id" element={<MovieDetailContainer />} />
         </Routes>
       </WebLayout>

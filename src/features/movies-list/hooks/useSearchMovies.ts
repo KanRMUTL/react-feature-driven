@@ -1,16 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPopularMovies, searchMovies } from "../services/movieService";
+import { getMoviesByCategory, searchMovies } from "../services/movieService";
 import {
   PopularMoviesResponse,
   SearchMoviesResponse,
 } from "features/movies-list/types/movie";
+import { MovieCategory } from "../services/movieService";
 
-export const useSearchMovies = (page: number, searchKeyword?: string) => {
+export const useSearchMovies = (
+  page: number,
+  searchKeyword?: string,
+  category: MovieCategory = "popular"
+) => {
   return useQuery<PopularMoviesResponse | SearchMoviesResponse>({
-    queryKey: ["movies", searchKeyword, page],
+    queryKey: ["movies", searchKeyword, page, category],
     queryFn: () =>
       searchKeyword
         ? searchMovies(searchKeyword, page)
-        : getPopularMovies(page),
+        : getMoviesByCategory(category, page),
   });
 };

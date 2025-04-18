@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { useSearchMovies } from "../hooks/useSearchMovies";
 import { useMovieNavigation } from "../hooks/useMovienavigation";
 import { SearchBar } from "../components/SearchBar";
@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { Box } from "shared/components/ui/Box";
 import { Pagination } from "shared/components/ui/Pagination";
 import { MovieListWithLoading } from "../components/MovieListWithLoading";
+import { Navigation } from "../components/MovieNavigation";
+import { CATEGORY_MAP } from "../constant/category";
 
 const Grid = styled.div`
   display: grid;
@@ -16,9 +18,16 @@ const Grid = styled.div`
 
 export const MovieListContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { pathname } = useLocation();
   const searchKeyword = searchParams.get("q") || "";
   const currentPage = Number(searchParams.get("page")) || 1;
-  const { data, isLoading } = useSearchMovies(currentPage, searchKeyword);
+  const category = CATEGORY_MAP[pathname] || 'popular';
+
+  const { data, isLoading } = useSearchMovies(
+    currentPage,
+    searchKeyword,
+    category
+  );
   const { handleMovieClick } = useMovieNavigation();
 
   const handleSearch = (keyword: string) => {
@@ -37,14 +46,14 @@ export const MovieListContainer = () => {
   const movieList = data?.results || [];
 
   return (
-    <Box>
+    <Box $flex $direction="column" $gap="sm">
+      <Navigation />
       <SearchBar onSearch={handleSearch} initialValue={searchKeyword} />
       <Grid>
         <MovieListWithLoading
-          {...data?.results}
-          onClick={(id) => handleMovieClick(id)}
-          isLoading={isLoading}
           movieList={movieList}
+          onClick={handleMovieClick}
+          isLoading={isLoading}
         />
       </Grid>
       <Pagination

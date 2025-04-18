@@ -35,6 +35,7 @@ const Footer = styled.footer`
 
 const Title = styled.h1`
   cursor: pointer;
+  margin: 0;
 `;
 
 interface WebLayoutProps {
@@ -52,7 +53,6 @@ export const WebLayout = ({ children }: WebLayoutProps) => {
       <Header>
         <Box $flex $justify="space-between" $align="center">
           <Title onClick={handleTitleClick}>The Movie Database</Title>
-          <nav>{/* Add navigation items here */}</nav>
         </Box>
       </Header>
       <Main>{children}</Main>
