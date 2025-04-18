@@ -1,4 +1,4 @@
-import { useSearchParams, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useSearchMovies } from "../hooks/useSearchMovies";
 import { useMovieNavigation } from "../hooks/useMovienavigation";
 import { SearchBar } from "../components/SearchBar";
@@ -18,11 +18,10 @@ const Grid = styled.div`
 
 export const MovieListContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { pathname } = useLocation();
   const searchKeyword = searchParams.get("q") || "";
   const currentPage = Number(searchParams.get("page")) || 1;
-  const category = CATEGORY_MAP[pathname] || 'popular';
-
+  const category = CATEGORY_MAP[searchParams.get("category") || ''] || 'popular';
+  
   const { data, isLoading } = useSearchMovies(
     currentPage,
     searchKeyword,
@@ -45,9 +44,13 @@ export const MovieListContainer = () => {
   const totalPages = Math.min(data?.total_pages || 0, 500);
   const movieList = data?.results || [];
 
+  const handleSelectCategory = (_category: string) => {
+    setSearchParams({category: _category, page: "1"});
+  };
+
   return (
     <Box $flex $direction="column" $gap="sm">
-      <Navigation />
+      <Navigation category={category}  onClick={handleSelectCategory} />
       <SearchBar onSearch={handleSearch} initialValue={searchKeyword} />
       <Grid>
         <MovieListWithLoading

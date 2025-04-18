@@ -39,14 +39,14 @@ export const SearchBar = ({ onSearch, initialValue = "" }: SearchBarProps) => {
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="ค้นหาชื่อหนัง..."
+        placeholder="Search movie..."
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             onSearch(value);
           }
         }}
       />
-      <Button onClick={() => onSearch(value)}>ค้นหา</Button>
+      <Button onClick={() => onSearch(value)}>Search</Button>
     </Container>
   );
 };

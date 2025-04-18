@@ -19,6 +19,7 @@ export interface Theme {
       primary: string;
       secondary: string;
       disabled: string;
+      white: string;
     };
   };
   spacing: {

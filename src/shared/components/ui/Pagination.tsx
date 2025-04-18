@@ -15,13 +15,15 @@ const PageButton = styled.button<{ $active?: boolean }>`
   background: ${({ theme, $active }) =>
     $active ? theme.colors.primary.main : theme.colors.background.main};
   color: ${({ theme, $active }) =>
-    $active ? theme.colors.background.main : theme.colors.text.primary};
+    $active ? theme.colors.text.white : theme.colors.text.primary};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
 
   &:hover {
     background: ${({ theme, $active }) =>
       $active ? theme.colors.primary.dark : theme.colors.background.hover};
+    color: ${({ theme, $active }) =>
+      $active ? theme.colors.background.main : theme.colors.text.white};
   }
 
   &:disabled {
