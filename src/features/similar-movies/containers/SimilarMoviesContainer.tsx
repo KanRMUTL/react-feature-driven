@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useMovieNavigation } from "shared/hooks/useMovienavigation";
 import { useSimilarMovies } from "../hooks/useSimilarMovies";
 import { Box } from "shared/components/ui/Box";
-import { SimilarMovies } from "../components/SimilarMovies";
+import { MovieListWithLoading } from "../components/MovieListWithLoading";
 
 type SimilarMoviesContainer = {
   movieId: number;
@@ -27,14 +27,17 @@ interface SimilarMoviesContainerProps {
 const SimilarMoviesContainer = ({ movieId }: SimilarMoviesContainerProps) => {
   const { data, isLoading } = useSimilarMovies(movieId);
   const { handleMovieClick } = useMovieNavigation();
-
-  if (isLoading || !data?.results.length) return null;
+  const movies = data?.results || [];
 
   return (
     <Box>
       <Title>Similar Movies</Title>
       <Grid>
-        <SimilarMovies movies={data.results} onClickMovie={handleMovieClick} />
+        <MovieListWithLoading
+          movies={movies}
+          onClickMovie={handleMovieClick}
+          isLoading={isLoading}
+        />
       </Grid>
     </Box>
   );

@@ -1,13 +1,9 @@
-import { useSearchParams } from "react-router-dom";
 import { useSearchMovies } from "../hooks/useSearchMovies";
-import { useMovieNavigation } from "../../../shared/hooks/useMovienavigation";
-import { SearchBar } from "../components/SearchBar";
+import { useMovieNavigation } from "shared/hooks/useMovienavigation";
 import styled from "styled-components";
-import { Box } from "shared/components/ui/Box";
-import { Pagination } from "shared/components/ui/Pagination";
 import { MovieListWithLoading } from "../components/MovieListWithLoading";
-import { Navigation } from "../components/MovieNavigation";
-import { CATEGORY_MAP } from "../constant/category";
+import { Pagination } from "shared/components/ui/Pagination";
+import { MovieCategory } from "../services/movieService";
 
 const Grid = styled.div`
   display: grid;
@@ -16,43 +12,31 @@ const Grid = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
-export const MovieListContainer = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchKeyword = searchParams.get("q") || "";
-  const currentPage = Number(searchParams.get("page")) || 1;
-  const category =
-    CATEGORY_MAP[searchParams.get("category") || ""] || "popular";
+interface MovieListContainerProps {
+  currentPage: number;
+  searchKeyword: string;
+  category: MovieCategory;
+  handlePageChange: (page: number) => void;
+}
 
+export const MovieListContainer = ({
+  currentPage,
+  searchKeyword,
+  category,
+  handlePageChange,
+}: MovieListContainerProps) => {
   const { data, isLoading } = useSearchMovies(
     currentPage,
     searchKeyword,
     category
   );
+
+  const movieList = data?.results || [];
+  const totalPages = Math.min(data?.total_pages || 0, 500);
   const { handleMovieClick } = useMovieNavigation();
 
-  const handleSearch = (keyword: string) => {
-    setSearchParams({ q: keyword, page: "1" });
-  };
-
-  const handlePageChange = (page: number) => {
-    setSearchParams((prev) => {
-      prev.set("page", page.toString());
-      return prev;
-    });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const totalPages = Math.min(data?.total_pages || 0, 500);
-  const movieList = data?.results || [];
-
-  const handleSelectCategory = (_category: string) => {
-    setSearchParams({ category: _category, page: "1" });
-  };
-
   return (
-    <Box $flex $direction="column" $gap="sm" $bg="surface">
-      <Navigation category={category} onClick={handleSelectCategory} />
-      <SearchBar onSearch={handleSearch} initialValue={searchKeyword} />
+    <>
       <Grid>
         <MovieListWithLoading
           movieList={movieList}
@@ -65,6 +49,6 @@ export const MovieListContainer = () => {
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-    </Box>
+    </>
   );
 };

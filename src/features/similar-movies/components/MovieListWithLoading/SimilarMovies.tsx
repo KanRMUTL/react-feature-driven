@@ -9,7 +9,7 @@ interface SimilarMoviesProps {
 export const SimilarMovies = ({ movies, onClickMovie }: SimilarMoviesProps) => {
   return (
     <>
-      {movies.slice(0, 6).map((movie) => (
+      {movies.map((movie) => (
         <MovieCard
           key={movie.id}
           {...movie}

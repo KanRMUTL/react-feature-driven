@@ -1,7 +1,7 @@
 import {
   MovieCard,
   MovieCardProps,
-} from "../../../../shared/components/movie/MovieCard";
+} from "shared/components/movie/MovieCard";
 
 interface Movie extends MovieCardProps {
   id: number;
