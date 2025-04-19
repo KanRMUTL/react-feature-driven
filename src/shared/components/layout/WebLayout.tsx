@@ -10,7 +10,7 @@ const LayoutContainer = styled(Box)`
 `;
 
 const Header = styled.header`
-  background: ${({ theme }) => theme.colors.background.white};
+  background: ${({ theme }) => theme.colors.background.surface};
   padding: ${({ theme }) => theme.spacing.md};
   box-shadow: ${({ theme }) => theme.shadows.sm};
   position: sticky;
@@ -37,6 +37,7 @@ const Footer = styled.footer`
 const Title = styled.h1`
   cursor: pointer;
   margin: 0;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 interface WebLayoutProps {

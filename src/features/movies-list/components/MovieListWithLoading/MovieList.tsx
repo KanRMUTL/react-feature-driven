@@ -1,4 +1,7 @@
-import { MovieCard,MovieCardProps } from "../MovieCard";
+import {
+  MovieCard,
+  MovieCardProps,
+} from "../../../../shared/components/movie/MovieCard";
 
 interface Movie extends MovieCardProps {
   id: number;
@@ -6,12 +9,11 @@ interface Movie extends MovieCardProps {
 
 interface MovieListProps {
   onClick: (id: number) => void;
-  movieList: Movie[]
+  movieList: Movie[];
 }
 
-export const MovieList = ({onClick, movieList}: MovieListProps) => {
+export const MovieList = ({ onClick, movieList }: MovieListProps) => {
   return movieList.map((movie) => (
-    <MovieCard key={movie.id} {...movie} onClick={() => onClick(movie.id)}
-    />
+    <MovieCard key={movie.id} {...movie} onClick={() => onClick(movie.id)} />
   ));
 };
