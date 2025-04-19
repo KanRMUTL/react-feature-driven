@@ -67,7 +67,7 @@ export const MovieCard = ({
       <MovieTitle>{title}</MovieTitle>
       <Rating>
         <span>⭐</span>
-        <span>{vote_average.toFixed(1)}</span>
+        <span>{vote_average?.toFixed(1) || "N/A"}</span>
       </Rating>
     </MovieInfo>
   </MovieCardContainer>

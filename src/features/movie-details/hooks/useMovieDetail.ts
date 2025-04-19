@@ -1,14 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieDetail } from "../services/movieDetailService";
 import { MovieDetail } from "../types/movieDetail";
 
-export const useMovieDetail = () => {
-  const { id } = useParams();
+export const useMovieDetail = (movieId: number) => {
   const { data, isLoading } = useQuery<MovieDetail>({
-    queryKey: ["movie", id],
-    queryFn: () => getMovieDetail(Number(id)),
-    enabled: !!id,
+    queryKey: ["movie", movieId],
+    queryFn: () => getMovieDetail(movieId),
+    enabled: !!movieId,
   });
 
   const director = data?.credits.crew.find((p) => p.job === "Director");
