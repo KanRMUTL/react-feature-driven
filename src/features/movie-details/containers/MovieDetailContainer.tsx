@@ -101,23 +101,22 @@ export const MovieDetailContainer = () => {
             </Rating>
             <span>📅 {data.release_date}</span>
           </MovieMeta>
-          <Overview>{data.overview}</Overview>
           {director && (
             <Box>
               <strong>🎬 Director:</strong> {director.name}
             </Box>
           )}
+          <Overview>{data.overview}</Overview>
+          <CastSection>
+            <SectionTitle>Cast</SectionTitle>
+            <CastList>
+              {actors.map((actor) => (
+                <CastItem key={actor.id}>{actor.name}</CastItem>
+              ))}
+            </CastList>
+          </CastSection>
         </MovieContent>
       </MovieHeader>
-
-      <CastSection>
-        <SectionTitle>Cast</SectionTitle>
-        <CastList>
-          {actors.map((actor) => (
-            <CastItem key={actor.id}>{actor.name}</CastItem>
-          ))}
-        </CastList>
-      </CastSection>
     </DetailContainer>
   );
 };
